@@ -225,6 +225,9 @@
     <Content Include="assets\scss\paper-dashboard\_tables.scss" />
     <Content Include="assets\scss\paper-dashboard\_typography.scss" />
     <Content Include="assets\scss\paper-dashboard\_variables.scss" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FTPProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\juriseg - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\bootstrap4.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -248,15 +251,12 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
-    <None Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
     <None Include="Views\Home\Index.cshtml.OLD" />
     <Content Include="Views\Shared\_Layout_login.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
-    <None Include="Views\Shared\_Layout.cshtml.OLD" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

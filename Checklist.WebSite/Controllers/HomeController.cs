@@ -8,48 +8,49 @@ namespace Checklist.WebSite.Controllers
 {
     public class HomeController : Controller
     {
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
             if (Session.Count <= 0)
                 return RedirectToAction("Login", "Login");
-            
-        if(Session["USR"] != null)
-            if (((Token)Session["USR"]).logado)
-            {
-                IndexModel model = new IndexModel();
-                model.Token = ((Token)Session["USR"]);
 
-                    if(Session["ATU"] != null)
-                        if((bool)Session["ATU"])
-                            {
+            if (Session["USR"] != null)
+                if (((Token)Session["USR"]).logado)
+                {
+                    IndexModel model = new IndexModel();
+                    model.Token = ((Token)Session["USR"]);
+
+                    if (Session["ATU"] != null)
+                        if ((bool)Session["ATU"])
+                        {
                             ViewBag.Message = "Atualizado com Sucesso";
                             ViewBag.Validacao = true;
-                            }
-                    else {
+                        }
+                        else
+                        {
                             ViewBag.Message = "Erro ao Atualizar";
                             ViewBag.Validacao = false;
                         }
 
-             //model.Usuario = await ApiServices.BuscarUsuario(model.Token);
+                    //model.Usuario = await ApiServices.BuscarUsuario(model.Token);
 
-                ViewData["Usuario"] = model.Token.Usuario.Login;
-                ViewData["Token"] = model.Token.access_token;
-                ViewData["Nome"] = model.Token.Usuario.Nome;
-                ViewData["UsuarioId"] = model.Token.Usuario.Id;
-                ViewData["FilialId"] = model.Token.Usuario.FilialId;
-                ViewData["Filial"] = "TESTE"; //model.Usuario.Filial.Fantasia;
-                ViewData["Usuario.Nome"] = model.Token.Usuario.Nome;
-                ViewData["Usuario.usuario"] = model.Token.Usuario.Login;
-                ViewData["Usuario.Filial"] = "TESTE";//= model.Usuario.Filial.Razao;
-                ViewData["Usuario.Tipo"] = model.Token.Usuario.Tipo;
-                ViewData["Usuario.Tipo.Nome"] = "Administrador";
+                    ViewData["Usuario"] = model.Token.Usuario.Login;
+                    ViewData["Token"] = model.Token.access_token;
+                    ViewData["Nome"] = model.Token.Usuario.Nome;
+                    ViewData["UsuarioId"] = model.Token.Usuario.Id;
+                    ViewData["FilialId"] = model.Token.Usuario.FilialId;
+                    ViewData["Filial"] = "TESTE"; //model.Usuario.Filial.Fantasia;
+                    ViewData["Usuario.Nome"] = model.Token.Usuario.Nome;
+                    ViewData["Usuario.usuario"] = model.Token.Usuario.Login;
+                    ViewData["Usuario.Filial"] = "TESTE";//= model.Usuario.Filial.Razao;
+                    ViewData["Usuario.Tipo"] = model.Token.Usuario.Tipo;
+                    ViewData["Usuario.Tipo.Nome"] = "Administrador";
 
 
                     Session.Timeout = 10;
-                    return View(model);
-            }
+                    return View("~/Views/Home/Index.cshtml", model);
+                }
 
-             return RedirectToAction("Login", "Login");           
+            return RedirectToAction("Login", "Login");
         }
 
         public async Task<ActionResult> Atualizar(IndexModel model)

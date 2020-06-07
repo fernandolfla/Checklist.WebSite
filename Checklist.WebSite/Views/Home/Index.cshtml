@@ -1,0 +1,169 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model WebSite.Models.IndexModel
+
+<!--<div class="jumbotron">
+
+    <div class="row"> <span>Id:       @ViewData["UsuarioId"]          </span></div>
+    <div class="row"> <span>Usuário:  @ViewData["Usuario"]            </span> </div>
+    <div class="row"> <span>Nome:     @ViewData["Nome"]        </span></div>
+    <div class="row"> <span>Filial:   @ViewData["FilialId"]      </span></div>
+    <div class="row"> <span>Token :   @ViewData["token"]         </span></div>
+    <div class="row"> <span>Filial :   @ViewData["Filial"]       </span></div>
+
+</div> -->
+
+
+<div class="content">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card card-user">
+                <div class="image">
+                    <img src="../assets/img/damir-bosnjak.jpg" alt="...">
+                </div>
+                <div class="card-body">
+                    <div class="author">
+                        <a href="#">
+                            <img class="avatar border-gray" src="../assets/img/logo-small.png" alt="...">
+                            <h5 class="title">@ViewData["Nome"]</h5>
+                        </a>
+                        <p class="description">
+
+                        </p>
+                    </div>
+                    <p class="description text-center">
+                        Acesso a Filial: @ViewData["FilialId"] <br>
+                        Acesso a Cadastros Geral
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <hr>
+                    <div class="button-container">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-6 col-6 ml-auto">
+                                <h5><br>Login:<br><small> @ViewData["Usuario"] </small></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-8">
+            <div class="card card-user">
+                <div class="card-header">
+                    <h5 class="card-title">Cadastro de Usuários</h5>
+                </div>
+                @using (Html.BeginForm("Atualizar", "Home", FormMethod.Post, new { @name = "AtualizaUsuario" }))
+                {
+                    @Html.AntiForgeryToken();
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="card-body">
+                        <form>
+                            <div class="row">
+                                <div class="col-md-8 pr-1">
+                                    <div class="form-group">
+                                        <label>Nome Completo</label>
+
+                                        @Html.EditorFor(model => model.Token.Usuario.Nome, new
+                                   {
+                                       htmlAttributes = new
+                                       {
+                                           @class = "form-control",
+                                           maxlength = "60",
+                                           required = true,
+                                           value = @ViewData["Usuario.Nome"]
+                                       }
+                                   })
+                                        @Html.ValidationMessageFor(model => model.Token.Usuario.Nome, "",
+                                          new { @class = "text-danger" })
+
+
+
+
+                                        <!--<input type="text" class="form-control" value="ViewData["Usuario.Nome"]" maxlength="60"> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+                                        <label>Usuário</label>
+                                        <input type="text" class="form-control" disabled="" value="@ViewData["Usuario.usuario"]">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+                                        <label>Senha</label>
+                                        @Html.EditorFor(model => model.Token.Usuario.Senha, new
+                                   {
+                                       htmlAttributes = new
+                                       {
+                                           @class = "form-control",
+                                           maxlength = "8",
+                                           type = "password",
+                                           placeholder = "Senha",
+                                        required = true
+                                       }
+                                   })
+                                        @Html.ValidationMessageFor(model => model.Token.Usuario.Senha, "",
+                                          new { @class = "text-danger" })
+
+
+                                        <!--<input type="password" class="form-control" placeholder="Senha" maxlength="8">-->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+                                        <label>Filial</label>
+                                        <input type="text" class="form-control" disabled="" value="@ViewData["Usuario.Filial"]">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 pr-1">
+                                    <div class="form-group">
+                                        <label>Tipo</label>
+
+
+
+                                        @{ string tipo = @ViewData["Usuario.Tipo"].ToString(); }
+                                        @{ string textotipo = "Administrador"; }
+                                        @if (tipo.Equals("1")) { textotipo = "Administrador"; }
+                                        @if (tipo.Equals("2")) { textotipo = "Operador"; }
+                                        @if (tipo.Equals("3")) { textotipo = "Usuário"; }
+
+
+                                        <input type="text" class="form-control" disabled="" value="@textotipo">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="update ml-auto mr-auto">
+                                    <button type="submit" class="btn btn-primary btn-round">Atualizar Usuário</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@{ string mensagem = ViewBag.Message; }
+
+@if (ViewBag.Validacao != null)
+{
+    if (ViewBag.Validacao)
+    {
+        <script>
+            swal("Maravilha", '@mensagem' , "success");
+        </script>
+    }
+
+}
